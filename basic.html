@@ -34,7 +34,7 @@
 
     // Esta función se ejecuta cada vez que presionamos una tecla
     processing.keyPressed = function() {
-      if (processing.key == processing.CODED) {
+      //if (processing.key == processing.CODED) {
         switch(processing.keyCode) {
           case processing.UP:
             square.y-=5;
@@ -48,9 +48,17 @@
           case processing.RIGHT:
             square.x+=5;
           break;
+          case 107:
+            square.alto+=5;
+          break;
+          case 109:
+            square.alto-=5;
+          break;
+          default:
+            console.log(processing.keyCode);
         }
       }
-    }
+    //}
   }
 
   var canvas = document.getElementById("canvas");

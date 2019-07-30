@@ -2,6 +2,8 @@
 <script src="web-lib/processing.js"></script>
 <script src="web-lib/functional-light.js"></script>
 <script>
+  //Vamos a usar http://processingjs.org/
+
   // Importamos las librerias
   let { append, cons, first, isEmpty, isList, length, rest } = functionalLight;
 
@@ -13,6 +15,9 @@
 
   function sketchProc(processing) {
 
+    /**
+     * Esto se llama antes de iniciar el juego
+     */ 
     processing.setup = function () {
       processing.size(400, 400);
       processing.background(10, 200, 50);
@@ -54,6 +59,7 @@
   }
 
   var canvas = document.getElementById("canvas");
-  // attaching the sketchProc function to the canvas
+
+  // Adjuntamos nuestro sketch al framework de processing
   var processingInstance = new Processing(canvas, sketchProc);
 </script>

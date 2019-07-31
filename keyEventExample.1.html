@@ -18,7 +18,7 @@
      * Esto se llama antes de iniciar el juego
      */
     processing.setup = function () {
-      processing.frameRate(10);
+      processing.frameRate(60);
       processing.size(400, 400);
       processing.background(15, 200, 50);
       processing.state = { x: 100, y: 100, ancho: 100, alto: 100 };
@@ -40,6 +40,42 @@
       processing.state = processing.onTic(processing.state);
     };
 
+    /**
+    * Actualiza el mundo en cada tic del reloj. Retorna el nuevo stado del mundo
+    */
+    processing.onTic = function (world) {
+      return make(world, {});
+    }
+
+    /**
+    * Actualiza el mundo cada vez que se oprime una tecla. Retorna el nuevo stado del mundo
+    */
+    processing.onKeyEvent = function (world, keyCode) {
+      switch (keyCode) {
+        case processing.UP:
+          return make(world, { y: world.y - 5 });
+          break;
+        case processing.DOWN:
+          return make(world, { y: world.y + 5 });
+          break;
+        case processing.LEFT:
+          return make(world, { x: world.x - 5 });
+          break;
+        case processing.RIGHT:
+          return make(world, { x: world.x + 5 });
+          break;
+        case 107:
+          return make(world, { alto: world.alto + 5 });
+          break;
+        case 109:
+          return make(world, { alto: world.alto - 5 });
+          break;
+        default:
+          console.log(keyCode);
+          return make(world, {});
+      }
+    }
+
     // Esta función se ejecuta cada vez que presionamos una tecla. 
     // No cambie esta función. Su código debe ir en onKeyEvent
     processing.keyPressed = function () {
@@ -47,29 +83,29 @@
     }
     // Esta función se ejecuta cada vez movemos el mouse. 
     // No cambie esta función. Su código debe ir en onKeyEvent
-    procesing.mouseMoved = function() {
+    processing.mouseMoved = function() {
       processing.state = processing.onMouseEvent(processing.state, 
       {action: "move", mouseX: processing.mouseX, mouseY: processing.mouseY});
     }
 
     // Estas funciones controlan los eventos del mouse. 
     // No cambie estas funciones. Su código debe ir en OnMouseEvent
-    processi.mouseClicked = function() {
+    processing.mouseClicked = function() {
       processing.state = processing.onMouseEvent(processing.state, 
       {action: "click", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton});
     } 
 
-    processi.mouseDragged = function() {
+    processing.mouseDragged = function() {
       processing.state = processing.onMouseEvent(processing.state, 
       {action: "drag", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton});
     }
 
-    processi.mousePressed = function() {
+    processing.mousePressed = function() {
       processing.state = processing.onMouseEvent(processing.state, 
       {action: "press", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton});
     }
 
-    processi.mouseReleased = function() {
+    processing.mouseReleased = function() {
       processing.state = processing.onMouseEvent(processing.state, 
       {action: "release", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton});
     }

@@ -3,7 +3,6 @@
 <script src="web-lib/functional-light.js"></script>
 <script>
   //Vamos a usar http://processingjs.org/
-  // o https://p5js.org/reference/
 
   // Importamos las librerias
   let { append, cons, first, isEmpty, isList, length, rest } = functionalLight;
@@ -24,6 +23,41 @@
       processing.state = { x: 100, y: 100, ancho: 100, alto: 100 };
     }
 
+    /**
+    * Actualiza el mundo en cada tic del reloj. Retorna el nuevo stado del mundo
+    */
+    processing.onTic = function (world) {
+      return make(world, {});
+    }
+
+    /**
+    * Actualiza el mundo cada vez que se oprime una tecla. Retorna el nuevo stado del mundo
+    */
+    processing.onKeyEvent = function (world, keyCode) {
+      switch (keyCode) {
+        case processing.UP:
+          return make(world, { y: world.y - 5 });
+          break;
+        case processing.DOWN:
+          return make(world, { y: world.y + 5 });
+          break;
+        case processing.LEFT:
+          return make(world, { x: world.x - 5 });
+          break;
+        case processing.RIGHT:
+          return make(world, { x: world.x + 5 });
+          break;
+        case 107:
+          return make(world, { alto: world.alto + 5 });
+          break;
+        case 109:
+          return make(world, { alto: world.alto - 5 });
+          break;
+        default:
+          console.log(keyCode);
+          return make(world, {});
+      }
+    }
 
     // Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar
     processing.drawGame = function (world) {
@@ -31,7 +65,6 @@
       processing.fill(240, 240, 240);
       processing.rect(world.x, world.y, world.ancho, world.alto);
     }
-
 
     // Esta es la función que pinta todo. Se ejecuta 60 veces por segundo. 
     // No cambie esta función. Su código debe ir en drawGame

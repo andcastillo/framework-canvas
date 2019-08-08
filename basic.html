@@ -31,6 +31,11 @@
       processing.fill(240, 240, 240);
       processing.rect(world.x, world.y, world.ancho, world.alto);
     }
+    
+    // Actualiza el mundo despues de cada frame. En este ejemplo, no cambia nada, solo retorna una copia del mundo
+    processing.onTic = function(world) {
+      return Object.assign({}, world);
+    }
 
 
     // Esta es la función que pinta todo. Se ejecuta 60 veces por segundo. 

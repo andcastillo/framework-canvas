@@ -11,7 +11,7 @@
   function apply(a, f) {
     if (!isEmpty(a)) {
       f(first(a));
-      apply(rest(a));
+      apply(rest(a), f);
     }
   }
 
@@ -21,8 +21,8 @@
   }
 
 
-  const dx = 10;
-  const dy = 10;
+  const dx = 20;
+  const dy = 20;
 
   function make(data, attribute) {
     return Object.assign({}, data, attribute);
@@ -34,10 +34,10 @@
      * Esto se llama antes de iniciar el juego
      */
     processing.setup = function () {
-      processing.frameRate(60);
+      processing.frameRate(5);
       processing.size(400, 400);
       processing.background(15, 200, 50);
-      processing.state = {snake: [{ x: 3, y: 1 }, { x: 2, y: 1 }, { x: 1, y: 1 }], direction: {x: 1, y: 0}, food: {x: 5, y: 5 }};
+      processing.state = {snake: [{ x: 3, y: 1 }, { x: 2, y: 1 }, { x: 1, y: 1 }], dir: {x: 1, y: 0}, food: {x: 5, y: 5 }};
     }
 
 
@@ -63,7 +63,7 @@
     * Actualiza el mundo en cada tic del reloj. Retorna el nuevo stado del mundo
     */
     processing.onTic = function (world) {
-      return make(world, {snake: moveSnake(world.snake, world.direction)});
+      return make(world, {snake: moveSnake(world.snake, world.dir)});
     }
 
     /**
@@ -72,27 +72,25 @@
     processing.onKeyEvent = function (world, keyCode) {
       switch (keyCode) {
         case processing.UP:
-          return make(world, { y: world.y - 5 });
+          return make(world, {dir: {y: -1, x: 0}});
           break;
         case processing.DOWN:
-          return make(world, { y: world.y + 5 });
+          return make(world, {dir: {y: 1, x: 0}});
           break;
         case processing.LEFT:
-          return make(world, { x: world.x - 5 });
+          return make(world, {dir: {y: 0, x: -1}});
           break;
         case processing.RIGHT:
-          return make(world, { x: world.x + 5 });
-          break;
-        case 107:
-          return make(world, { alto: world.alto + 5 });
-          break;
-        case 109:
-          return make(world, { alto: world.alto - 5 });
+          return make(world, {dir: {y: 0, x: 1}});
           break;
         default:
           console.log(keyCode);
           return make(world, {});
       }
+    }
+
+    processing.onMouseEvent = function(a, b) {
+        return a;
     }
 
     // Esta función se ejecuta cada vez que presionamos una tecla. 

@@ -1,18 +1,32 @@
 <canvas id="canvas" width="300" height="300"></canvas>
 <script src="web-lib/processing.js"></script>
-<script src="web-lib/functional-light.js"></script>
+<script src="web-lib/fl-extended.js"></script>
 <script>
   //Vamos a usar http://processingjs.org/
   // o https://p5js.org/reference/
 
+
   // Importamos las librerias
-  let { append, cons, first, isEmpty, isList, length, rest } = functionalLight;
+  let { append, cons, first, isEmpty, isList, length, rest, map } = require("fl-extended");
+  function apply(a, f) {
+    if (!isEmpty(a)) {
+      f(first(a));
+      apply(rest(a));
+    }
+  }
+
+  function moveSnake(snake, dir) {
+    const head = first(snake);
+    return cons({x: head.x + dir.x, y: head.y + dir.y}, snake.slice(0, length(snake) - 1));
+  }
+
+
+  const dx = 10;
+  const dy = 10;
 
   function make(data, attribute) {
     return Object.assign({}, data, attribute);
   }
-
-  var color = 240;
 
   function sketchProc(processing) {
 
@@ -23,15 +37,18 @@
       processing.frameRate(60);
       processing.size(400, 400);
       processing.background(15, 200, 50);
-      processing.state = { x: 100, y: 100, ancho: 100, alto: 100 };
+      processing.state = {snake: [{ x: 3, y: 1 }, { x: 2, y: 1 }, { x: 1, y: 1 }], direction: {x: 1, y: 0}, food: {x: 5, y: 5 }};
     }
 
 
     // Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar
     processing.drawGame = function (world) {
       processing.background(10, 200, 50);
-      processing.fill(240, color, 240);
-      processing.rect(world.x, world.y, world.ancho, world.alto);
+      processing.fill(240, 240, 240);
+      apply(world.snake, s => {
+        processing.rect(s.x * dx, s.y * dy, dx, dy);
+      });
+      //processing.rect(world.x, world.y, world.ancho, world.alto);
     }
 
 
@@ -42,12 +59,40 @@
       processing.state = processing.onTic(processing.state);
     };
 
+    /**
+    * Actualiza el mundo en cada tic del reloj. Retorna el nuevo stado del mundo
+    */
     processing.onTic = function (world) {
-      return make(world, {x: world.x + 1});
+      return make(world, {snake: moveSnake(world.snake, world.direction)});
     }
 
-    processing.onMouseEvent = function(world, event) {
-      return make(world, {});
+    /**
+    * Actualiza el mundo cada vez que se oprime una tecla. Retorna el nuevo stado del mundo
+    */
+    processing.onKeyEvent = function (world, keyCode) {
+      switch (keyCode) {
+        case processing.UP:
+          return make(world, { y: world.y - 5 });
+          break;
+        case processing.DOWN:
+          return make(world, { y: world.y + 5 });
+          break;
+        case processing.LEFT:
+          return make(world, { x: world.x - 5 });
+          break;
+        case processing.RIGHT:
+          return make(world, { x: world.x + 5 });
+          break;
+        case 107:
+          return make(world, { alto: world.alto + 5 });
+          break;
+        case 109:
+          return make(world, { alto: world.alto - 5 });
+          break;
+        default:
+          console.log(keyCode);
+          return make(world, {});
+      }
     }
 
     // Esta función se ejecuta cada vez que presionamos una tecla. 

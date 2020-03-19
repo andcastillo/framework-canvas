@@ -34,19 +34,19 @@
 
     // Actualiza el mundo despues de cada frame. En este ejemplo, no cambia nada, solo retorna una copia del mundo
     processing.onTic = function (world) {
-      return Object.assign({}, world);
+      return make(world, {});
     }
 
     //Implemente esta función si quiere que su programa reaccione a eventos del mouse
     processing.onMouseEvent = function (world, event) {
-      //No hace nada. Solo retorna el mundo actual
-      return Object.assign({}, world);
+      // Por ahora no cambia el mundo. Solo retorna una copia del mundo actual
+      return make(world, {});
     };
 
     //Implemente esta función si quiere que su programa reaccione a eventos del teclado
     processing.onKeyEvent = function (world, event) {
-      //No hace nada. Solo retorna el mundo actual
-      return Object.assign({}, world);
+      // Por ahora no cambia el mundo. Solo retorna una copia del mundo actual
+      return make(world, {});
     }
 
     // ******************** De aquí hacia abajo no debe cambiar nada. ********************
@@ -63,7 +63,7 @@
     processing.keyPressed = function () {
       processing.state = processing.onKeyEvent(processing.state, processing.keyCode);
     }
-    
+
     // Esta función se ejecuta cada vez movemos el mouse. 
     // No cambie esta función. Su código debe ir en onKeyEvent
     processing.mouseMoved = function () {

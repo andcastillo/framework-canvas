@@ -1,0 +1,66 @@
+<canvas id="canvas" width="300" height="300"></canvas>
+<script src="web-lib/processing.js"></script>
+<script src="web-lib/fl-extended.js"></script>
+<script>
+  //Vamos a usar http://processingjs.org/
+
+  // Importamos las librerias
+  let { append, cons, first, isEmpty, isList, length, rest, map } = require("fl-extended");
+
+  const mySnake = [{ x: 3, y: 1 }, { x: 2, y: 1 }, { x: 1, y: 1 }];
+  const game = { snake: mySnake, direction: 'RIGHT', food: [{ x: 5, y: 5 }], score: 0 }
+  const dx = 50;
+  const dy = 50;
+
+  function sketchProc(processing) {
+
+    /**
+     * Esto se llama antes de iniciar el juego
+     */ 
+    processing.setup = function () {
+      processing.size(400, 400);
+      processing.background(10, 200, 50);
+    }
+
+    // Override draw function, by default it will be called 60 times per second
+    processing.draw = function () {
+      /**
+       *Dibuja la serpiente
+       */
+      function drawSnake(snake) {
+        snake.forEach(part => {
+          processing.fill(240, 240, 240);
+          processing.rect(part.x * dx, part.y * dy, dx, dy);
+        });
+      }
+      /**
+       * Dibuja la comida
+       */ 
+      function drawFood(food) {
+        food.forEach(part => {
+          processing.fill(200, 20, 10);
+          processing.ellipse(part.x * dx, part.y * dy, dx, dy);
+        });
+      }
+
+      /**
+       * Dibuja el score 
+       */
+      function drawScore(score) {
+        processing.textFont(processing.PFont, 18);
+        processing.text("Score: " + score, 10, 380); 
+      }
+
+      drawSnake(game.snake);
+      drawFood(game.food);
+      drawScore(game.score);
+
+      //No hay movimiento. Por tanto hemos quitado todo el resto de la página, de forma que el archivo sea simple de entender.
+    };
+  }
+
+  var canvas = document.getElementById("canvas");
+
+  // Adjuntamos nuestro sketch al framework de processing
+  var processingInstance = new Processing(canvas, sketchProc);
+</script>

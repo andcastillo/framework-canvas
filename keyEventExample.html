@@ -11,7 +11,7 @@
   function apply(a, f) {
     if (!isEmpty(a)) {
       f(first(a));
-      apply(rest(a));
+      apply(rest(a), f);
     }
   }
 
@@ -20,9 +20,9 @@
     return cons({x: head.x + dir.x, y: head.y + dir.y}, snake.slice(0, length(snake) - 1));
   }
 
-
   const dx = 10;
   const dy = 10;
+
 
   function make(data, attribute) {
     return Object.assign({}, data, attribute);
@@ -34,7 +34,7 @@
      * Esto se llama antes de iniciar el juego
      */
     processing.setup = function () {
-      processing.frameRate(60);
+      processing.frameRate(2);
       processing.size(400, 400);
       processing.background(15, 200, 50);
       processing.state = {snake: [{ x: 3, y: 1 }, { x: 2, y: 1 }, { x: 1, y: 1 }], direction: {x: 1, y: 0}, food: {x: 5, y: 5 }};

@@ -31,12 +31,25 @@
       processing.fill(240, 240, 240);
       processing.rect(world.x, world.y, world.ancho, world.alto);
     }
-    
+
     // Actualiza el mundo despues de cada frame. En este ejemplo, no cambia nada, solo retorna una copia del mundo
-    processing.onTic = function(world) {
+    processing.onTic = function (world) {
       return Object.assign({}, world);
     }
 
+    //Implemente esta función si quiere que su programa reaccione a eventos del mouse
+    processing.onMouseEvent = function (world, event) {
+      //No hace nada. Solo retorna el mundo actual
+      return Object.assign({}, world);
+    };
+
+    //Implemente esta función si quiere que su programa reaccione a eventos del teclado
+    processing.onKeyEvent = function (world, event) {
+      //No hace nada. Solo retorna el mundo actual
+      return Object.assign({}, world);
+    }
+
+    // ******************** De aquí hacia abajo no debe cambiar nada. ********************
 
     // Esta es la función que pinta todo. Se ejecuta 60 veces por segundo. 
     // No cambie esta función. Su código debe ir en drawGame
@@ -50,33 +63,34 @@
     processing.keyPressed = function () {
       processing.state = processing.onKeyEvent(processing.state, processing.keyCode);
     }
+    
     // Esta función se ejecuta cada vez movemos el mouse. 
     // No cambie esta función. Su código debe ir en onKeyEvent
-    procesing.mouseMoved = function() {
-      processing.state = processing.onMouseEvent(processing.state, 
-      {action: "move", mouseX: processing.mouseX, mouseY: processing.mouseY});
+    processing.mouseMoved = function () {
+      processing.state = processing.onMouseEvent(processing.state,
+        { action: "move", mouseX: processing.mouseX, mouseY: processing.mouseY });
     }
 
     // Estas funciones controlan los eventos del mouse. 
     // No cambie estas funciones. Su código debe ir en OnMouseEvent
-    processi.mouseClicked = function() {
-      processing.state = processing.onMouseEvent(processing.state, 
-      {action: "click", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton});
-    } 
-
-    processi.mouseDragged = function() {
-      processing.state = processing.onMouseEvent(processing.state, 
-      {action: "drag", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton});
+    processing.mouseClicked = function () {
+      processing.state = processing.onMouseEvent(processing.state,
+        { action: "click", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton });
     }
 
-    processi.mousePressed = function() {
-      processing.state = processing.onMouseEvent(processing.state, 
-      {action: "press", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton});
+    processing.mouseDragged = function () {
+      processing.state = processing.onMouseEvent(processing.state,
+        { action: "drag", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton });
     }
 
-    processi.mouseReleased = function() {
-      processing.state = processing.onMouseEvent(processing.state, 
-      {action: "release", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton});
+    processing.mousePressed = function () {
+      processing.state = processing.onMouseEvent(processing.state,
+        { action: "press", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton });
+    }
+
+    processing.mouseReleased = function () {
+      processing.state = processing.onMouseEvent(processing.state,
+        { action: "release", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton });
     }
   }
 

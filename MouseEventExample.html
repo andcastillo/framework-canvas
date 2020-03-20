@@ -12,6 +12,10 @@
     return Object.assign({}, data, attribute);
   }
 
+  /**
+  * Ejemplo de interacción de la aplicación con el mouse. Se reacciona al movimiento. No se implementan los Click
+  * La figura persigue al puntero.
+  */
   function sketchProc(processing) {
 
     /**
@@ -40,9 +44,9 @@
       processing.state = processing.onTic(processing.state);
     };
 
-    processing.onMouseEvent = function(world, event) {
+    processing.onMouseEvent = function (world, event) {
       if (event.action === 'move') {
-        return make(world, {x: event.mouseX, y: event.mouseY})
+        return make(world, { x: event.mouseX, y: event.mouseY })
       }
       return make(world, {});
     }
@@ -51,6 +55,8 @@
       return make(world, {});
     }
 
+    // ******************** De aquí hacia abajo no debe cambiar nada. ********************
+
     // Esta función se ejecuta cada vez que presionamos una tecla. 
     // No cambie esta función. Su código debe ir en onKeyEvent
     processing.keyPressed = function () {
@@ -58,32 +64,33 @@
     }
     // Esta función se ejecuta cada vez movemos el mouse. 
     // No cambie esta función. Su código debe ir en onKeyEvent
-    processing.mouseMoved = function() {
-      processing.state = processing.onMouseEvent(processing.state, 
-      {action: "move", mouseX: processing.mouseX, mouseY: processing.mouseY});
+    processing.mouseMoved = function () {
+      processing.state = processing.onMouseEvent(processing.state,
+        { action: "move", mouseX: processing.mouseX, mouseY: processing.mouseY });
     }
 
     // Estas funciones controlan los eventos del mouse. 
     // No cambie estas funciones. Su código debe ir en OnMouseEvent
-    processing.mouseClicked = function() {
-      processing.state = processing.onMouseEvent(processing.state, 
-      {action: "click", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton});
-    } 
-
-    processing.mouseDragged = function() {
-      processing.state = processing.onMouseEvent(processing.state, 
-      {action: "drag", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton});
+    processing.mouseClicked = function () {
+      processing.state = processing.onMouseEvent(processing.state,
+        { action: "click", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton });
     }
 
-    processing.mousePressed = function() {
-      processing.state = processing.onMouseEvent(processing.state, 
-      {action: "press", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton});
+    processing.mouseDragged = function () {
+      processing.state = processing.onMouseEvent(processing.state,
+        { action: "drag", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton });
     }
 
-    processing.mouseReleased = function() {
-      processing.state = processing.onMouseEvent(processing.state, 
-      {action: "release", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton});
+    processing.mousePressed = function () {
+      processing.state = processing.onMouseEvent(processing.state,
+        { action: "press", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton });
     }
+
+    processing.mouseReleased = function () {
+      processing.state = processing.onMouseEvent(processing.state,
+        { action: "release", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton });
+    }
+    // Fin de los eventos del mouse
   }
 
   var canvas = document.getElementById("canvas");

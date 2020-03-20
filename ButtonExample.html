@@ -1,4 +1,19 @@
 <canvas id="canvas" width="300" height="300"></canvas>
+<p>
+  <button onClick="processingInstance.setup()">
+    Reiniciar
+  </button>
+  <button onClick="processingInstance.changeColor()">
+    Cambiar color
+  </button>
+  <button onClick="processingInstance.setSpeed(10)">
+    Velocidad 10
+  </button>
+  <button onClick="processingInstance.setSpeed(30)">
+    Velocidad 30
+  </button>
+</p>
+
 <script src="web-lib/processing.js"></script>
 <script src="web-lib/functional-light.js"></script>
 <script>
@@ -14,6 +29,10 @@
 
   var color = 240;
 
+  /**
+  * Ejemplo de interacción de la aplicación con botones de HTML. 
+  * Los eventos de los botones modifican la animación 
+  */
   function sketchProc(processing) {
 
     /**
@@ -42,17 +61,17 @@
       processing.state = processing.onTic(processing.state);
     };
 
-    processing.changeColor = function() {
+    processing.changeColor = function () {
       color = Math.round(Math.random() * 255);
     }
 
-    processing.setSpeed = function(value) {
+    processing.setSpeed = function (value) {
       processing.frameRate(value);
     }
 
     // Actualiza el mundo despues de cada frame. En este ejemplo, no cambia nada, solo retorna una copia del mundo
     processing.onTic = function (world) {
-      return make(world, {x: world.x + 1});
+      return make(world, { x: world.x + 1 });
     }
 
     //Implemente esta función si quiere que su programa reaccione a eventos del mouse
@@ -76,31 +95,31 @@
     }
     // Esta función se ejecuta cada vez movemos el mouse. 
     // No cambie esta función. Su código debe ir en onKeyEvent
-    processing.mouseMoved = function() {
-      processing.state = processing.onMouseEvent(processing.state, 
-      {action: "move", mouseX: processing.mouseX, mouseY: processing.mouseY});
+    processing.mouseMoved = function () {
+      processing.state = processing.onMouseEvent(processing.state,
+        { action: "move", mouseX: processing.mouseX, mouseY: processing.mouseY });
     }
 
     // Estas funciones controlan los eventos del mouse. 
     // No cambie estas funciones. Su código debe ir en OnMouseEvent
-    processing.mouseClicked = function() {
-      processing.state = processing.onMouseEvent(processing.state, 
-      {action: "click", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton});
-    } 
-
-    processing.mouseDragged = function() {
-      processing.state = processing.onMouseEvent(processing.state, 
-      {action: "drag", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton});
+    processing.mouseClicked = function () {
+      processing.state = processing.onMouseEvent(processing.state,
+        { action: "click", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton });
     }
 
-    processing.mousePressed = function() {
-      processing.state = processing.onMouseEvent(processing.state, 
-      {action: "press", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton});
+    processing.mouseDragged = function () {
+      processing.state = processing.onMouseEvent(processing.state,
+        { action: "drag", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton });
     }
 
-    processing.mouseReleased = function() {
-      processing.state = processing.onMouseEvent(processing.state, 
-      {action: "release", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton});
+    processing.mousePressed = function () {
+      processing.state = processing.onMouseEvent(processing.state,
+        { action: "press", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton });
+    }
+
+    processing.mouseReleased = function () {
+      processing.state = processing.onMouseEvent(processing.state,
+        { action: "release", mouseX: processing.mouseX, mouseY: processing.mouseY, mouseButton: processing.mouseButton });
     }
     // Fin de los eventos del mouse
   }
@@ -110,17 +129,3 @@
   // Adjuntamos nuestro sketch al framework de processing
   var processingInstance = new Processing(canvas, sketchProc);
 </script>
-<p>
-  <button onClick="processingInstance.setup()">
-    Reiniciar
-  </button>
-  <button onClick="processingInstance.changeColor()">
-    Cambiar color
-  </button>
-  <button onClick="processingInstance.setSpeed(10)">
-    Velocidad 10
-  </button>
-  <button onClick="processingInstance.setSpeed(30)">
-    Velocidad 30
-  </button>
-</p>

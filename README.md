@@ -2,7 +2,7 @@
 
 Con este pequeño ejemplo, los estudiantes podrán crear pequeñas animaciones usando JavaScript. Para usarlo, solo debe clonar este repositorio.
 
-El punto de entrada para entender cómo funciona el framework es el archivo basic.html. En este se pinta un cuadrado que definimos usando una estructura y se mueve usando las flechas del teclado.
+El punto de entrada para entender cómo funciona el framework es el archivo basic.html[basic.html]. En este se pinta un cuadrado que definimos usando una estructura y se mueve usando las flechas del teclado.
 
 ``` js
  const square = { x: 100, y: 100, ancho: 100, alto: 100 };

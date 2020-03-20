@@ -4,7 +4,6 @@
 <script>
   //Vamos a usar http://processingjs.org/
   // o https://p5js.org/reference/
-
   // Importamos las librerias
   let { append, cons, first, isEmpty, isList, length, rest } = functionalLight;
 
@@ -13,44 +12,41 @@
   }
 
   /**
-   * Ejemplo de pintar un rectángulo coloreado en un canvas cuadrado 
+   * Ejemplo de animación usando los evento de reloj del procesador. Es la animación mas simple. 
    * No requiere interacción con el usuario
    */
 
   function sketchProc(processing) {
-
     /**
      * Esto se llama antes de iniciar el juego
      */
     processing.setup = function () {
-      processing.frameRate(10);
+      processing.frameRate(60);
       processing.size(400, 400);
       processing.background(15, 200, 50);
       processing.state = { x: 100, y: 100, ancho: 100, alto: 100 };
     }
-
-
     // Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar
     processing.drawGame = function (world) {
       processing.background(10, 200, 50);
       processing.fill(240, 240, 240);
       processing.rect(world.x, world.y, world.ancho, world.alto);
     }
-
-    // Actualiza el mundo despues de cada frame. En este ejemplo, no cambia nada, solo retorna una copia del mundo
-    processing.onTic = function (world) {
-      return make(world, {});
-    }
-
-    //Implemente esta función si quiere que su programa reaccione a eventos del mouse
-    processing.onMouseEvent = function (world, event) {
-      // Por ahora no cambia el mundo. Solo retorna una copia del mundo actual
-      return make(world, {});
+    // Esta es la función que pinta todo. Se ejecuta 60 veces por segundo. 
+    // No cambie esta función. Su código debe ir en drawGame
+    processing.draw = function () {
+      processing.drawGame(processing.state);
+      processing.state = processing.onTic(processing.state);
     };
 
-    //Implemente esta función si quiere que su programa reaccione a eventos del teclado
-    processing.onKeyEvent = function (world, event) {
-      // Por ahora no cambia el mundo. Solo retorna una copia del mundo actual
+    /**
+     * Cambia la posición del objeto moviendolo 1 unidad a la derecha. 
+     */
+    processing.onTic = function (world) {
+      return make(world, { x: world.x + 1 });
+    }
+
+    processing.onMouseEvent = function (world, event) {
       return make(world, {});
     }
 
@@ -99,9 +95,7 @@
     }
     // Fin de los eventos del mouse
   }
-
   var canvas = document.getElementById("canvas");
-
   // Adjuntamos nuestro sketch al framework de processing
   var processingInstance = new Processing(canvas, sketchProc);
 </script>

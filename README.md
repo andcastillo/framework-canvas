@@ -4,6 +4,8 @@ Licencia: MIT
 
 Con este pequeño ejemplo, los estudiantes podrán crear pequeñas animaciones usando JavaScript. Para usarlo, solo debe clonar este repositorio. Se debería usar junto con este [repositorio para manejo de listas](https://github.com/andcastillo/functional-light) 
 
+La documentación de la librería con la cúal pueden realizar los gráficos es [processing.js](http://processingjs.org/reference/). Vayan para saber sobre todas las posibilidades de la librería.
+
 ## basic
 
 El punto de entrada para entender cómo funciona el framework es el archivo [basic.html](basic.html). En este ejemplo se pinta un cuadrado que definimos usando una estructura. Por ahora no tiene ningun tipo de animación o interactividad.

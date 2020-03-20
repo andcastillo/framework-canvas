@@ -58,6 +58,6 @@ En este quinto ejemplo, [buttonExample](buttonExample), mostramos como crear 4 b
 
 Este ejemplo, [snakePintar](snakePintar),  ilustra una idea para pintar en el lienzo, un objeto mucho mas complejo que el cuadrado. En este caso, pintamos una lista de cuadrados sobre el lienzo. Es una idea de cómo se puede pintar la serpiente en el juego de SnakeJS. No tiene animaciones. Se puede poner como reto a los estudiantes que implementen el movimiento de esta serpiente usando lo que saben.
 
-## snakeMovimiento
+ **snakeMovimiento**
 
 [snakeMovimiento](snakeMovimiento) es un ejemplo mucho más completo, sobre como realizar la animación y el movimiento de la serpiente en nuestro SnakeJS. La serpiente cambia de dirección con las flechas del teclado.

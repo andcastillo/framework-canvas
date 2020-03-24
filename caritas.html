@@ -41,7 +41,6 @@
 
     // Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar
     processing.drawGame = function (world) {
-        console.log(world)
         if (world == 1)
             processing.image(m1, 0, 0);
         if (world == 2)
@@ -55,6 +54,18 @@
     // Actualiza el mundo despues de cada frame. En este ejemplo, no cambia nada, solo retorna una copia del mundo
     processing.onTic = function (world) {
       return (world % 4) +1;
+    }
+
+    //Implemente esta función si quiere que su programa reaccione a eventos del mouse
+     processing.onMouseEvent = function (world, event) {
+      // Por ahora no cambia el mundo. Solo retorna una copia del mundo actual
+      return world;
+    };
+
+    //Implemente esta función si quiere que su programa reaccione a eventos del teclado
+    processing.onKeyEvent = function (world, event) {
+      // Por ahora no cambia el mundo. Solo retorna una copia del mundo actual
+      return world;
     }
 
     // ******************** De aquí hacia abajo no debe cambiar nada. ********************

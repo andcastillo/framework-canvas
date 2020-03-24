@@ -53,7 +53,7 @@
 
     // Actualiza el mundo despues de cada frame. En este ejemplo, no cambia nada, solo retorna una copia del mundo
     processing.onTic = function (world) {
-      return (world % 4) +1;
+      return Math.ceil(Math.random() * 4 + 0.5);
     }
 
     //Implemente esta función si quiere que su programa reaccione a eventos del mouse

@@ -6,7 +6,7 @@
   // o https://p5js.org/reference/
 
   // Importamos las librerias
-  let { append, cons, first, isEmpty, isList, length, rest } = functionalLight;
+  //let { append, cons, first, isEmpty, isList, length, rest } = functionalLight;
 
   function make(data, attribute) {
     return Object.assign({}, data, attribute);
@@ -25,18 +25,32 @@
     processing.setup = function () {
       processing.frameRate(10);
       processing.size(400, 400);
-      processing.background(15, 200, 50);
-      processing.state = { x: 100, y: 100, ancho: 100, alto: 100 };
-
+      processing.state = { x: 0, y: 0, ancho: 200, alto: 100 };
       noLoop();
     }
 
 
     // Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar
     processing.drawGame = function (world) {
-      processing.background(10, 200, 50);
-      processing.fill(240, 240, 240);
+      processing.background(0, 255, 255);
+      processing.fill(240, 10, 240);
+      processing.strokeWeight(1);
       processing.rect(world.x, world.y, world.ancho, world.alto);
+      /*processing.ellipse(56, 200, 55, 55);
+      processing.fill(23, 100, 80);
+      processing.ellipse(300, 300, 55, 100);
+
+      processing.noFill();
+      processing.stroke(255, 102, 100);
+      processing.strokeWeight(5);
+      processing.arc(150, 150, 100, 80, 0, Math.PI);
+*/
+      /*processing.noFill();
+      processing.stroke(255, 102, 0);
+      processing.line(85, 20, 10, 10);
+      processing.line(90, 90, 15, 80);
+      processing.stroke(0, 0, 0);
+      processing.bezier(85, 20, 10, 10, 90, 90, 15, 80);*/
     }
 
     // Actualiza el mundo despues de cada frame. En este ejemplo, no cambia nada, solo retorna una copia del mundo

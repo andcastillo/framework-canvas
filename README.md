@@ -43,6 +43,17 @@ El segundo ejemplo de este proyecto es [ticEventExample.html](ticEventExample.ht
       ...
 ``` 
 
+### Ejercicio 1
+
+Diseñar e implementar un programa que muestra un cuadrado rebotando de izquierda a derecha, sin salirse del canvas que lo contiene. Pista: debe agragar un nuevo atributo al mundo que indique a dirección del movimiento.
+
+
+### Ejercicio 2
+
+Diseñar e implementar un programa que muestra un cuadrado que se mueve en ángulos de 45 grados, rebotando en una caja cuadrada
+sin salirse del canvas que lo contiene. Pista: debe agragar dos nuevos atributos al mundo que indiquen las dirección del movimiento.
+
+
 ## keyEventExample
 
 En este tercer ejemplo, [keyEventExample.html](keyEventExample.html), ilustramos la forma de hacer un programa interactivo, que reacciona a los eventos de las flechas del teclado. En este caso, el rectángulo del primer ejemplo se mueve hacia donde le indiquemos con las flechas del teclado, 5 pixeles por evento.

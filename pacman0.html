@@ -11,13 +11,27 @@
     return Object.assign({}, data, attribute);
   }
 
+  function forEach(l, f, index = 0) {
+    if (!isEmpty(l)) {
+      f(first(l), index);
+      forEach(rest(l), f, index + 1);
+    }
+  }
+
+
   /**
    * Ejemplo de animación usando los evento de reloj del procesador. Es la animación mas simple. 
    * No requiere interacción con el usuario
    */
   const WIDTH = 400;
   const HEIGHT = 400;
-  const SIZE = 20;
+  const SIZE = 40;
+  const mapa = [[1, 1, 1, 1, 1],
+  [1, 0, 2, 0, 1],
+  [1, 0, 0, 0, 1],
+  [1, 0, 1, 0, 1],
+  [1, 1, 1, 1, 1]];
+
   function sketchProc(processing) {
     /**
      * Esto se llama antes de iniciar el juego
@@ -25,7 +39,8 @@
     processing.setup = function () {
       processing.frameRate(2);
       processing.size(WIDTH, HEIGHT);
-      processing.state = { time: 0, pacman: {x: 10, y: 1}, cookies: [{x:1, y:2}, {x: 2, y: 1}]};
+      let bloque = processin.loadImage('b.png')
+      processing.state = { time: 0, pacman: { x: 10, y: 1 }, cookies: [{ x: 1, y: 2 }, { x: 2, y: 1 }], phantone: [{ x: 1, y: 10 }] };
     }
     // Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar
     processing.drawGame = function (world) {
@@ -33,10 +48,30 @@
       //Pintamos a pacman con la boca abierta
       processing.fill(10, 240, 30);
 
+      forEach(mapa, (row, i) => {
+        forEach(row, (cell, j) => {
+          if(cell == 1) {
+            processing.fill(200, 0, 0);
+            processing.rect(j * SIZE, i * SIZE, SIZE, SIZE);
+          } if (cell == 0) {
+            processing.fill(0, 0, 0);
+            processing.rect(j * SIZE, i * SIZE, SIZE, SIZE);
+          } if (cell == 2) {
+            processing.fill(0, 0, 0);
+            processing.rect(j * SIZE, i * SIZE, SIZE, SIZE);
+            processing.fill(250, 0, 200);
+            processing.ellipse(j * SIZE + SIZE / 2, i * SIZE + SIZE / 2, SIZE / 3, SIZE / 3);
+          }
+        } );
+      });
+
+      if (mapa[0][0] == 1)
+        processing.image(bloque, x, y)
+
       if (world.time % 2 == 0)
-        processing.arc(world.pacman.x * SIZE, world.pacman.y * SIZE, SIZE, SIZE, -Math.PI*3/4, Math.PI*3/4);
+        processing.arc(world.pacman.x * SIZE, world.pacman.y * SIZE, SIZE, SIZE, -Math.PI * 3 / 4, Math.PI * 3 / 4);
       else
-        processing.arc(world.pacman.x * SIZE, world.pacman.y * SIZE, SIZE, SIZE, 0, Math.PI*2);
+        processing.arc(world.pacman.x * SIZE, world.pacman.y * SIZE, SIZE, SIZE, 0, Math.PI * 2);
 
       processing.fill(250, 200, 30);
       const cookie1 = first(world.cookies);
@@ -47,7 +82,7 @@
      * Cambia la posición del objeto moviendolo 1 unidad a la derecha. 
      */
     processing.onTic = function (world) {
-      return make(world, { time: world.time + 1, pacman: {x: world.pacman.x - 1, y: world.pacman.y} });
+      return make(world, { time: world.time + 1, pacman: { x: world.pacman.x - 1, y: world.pacman.y } });
     }
 
     processing.onMouseEvent = function (world, event) {

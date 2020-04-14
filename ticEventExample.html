@@ -1,4 +1,4 @@
-<canvas id="canvas" width="300" height="300"></canvas>
+<canvas id="canvas" width="400" height="400"></canvas>
 <script src="web-lib/processing.js"></script>
 <script src="web-lib/functional-light.js"></script>
 <script>
@@ -15,15 +15,16 @@
    * Ejemplo de animación usando los evento de reloj del procesador. Es la animación mas simple. 
    * No requiere interacción con el usuario
    */
-
+  const WIDTH = 400;
+  const HEIGHT = 400;
   function sketchProc(processing) {
     /**
      * Esto se llama antes de iniciar el juego
      */
     processing.setup = function () {
       processing.frameRate(60);
-      processing.size(400, 400);
-      processing.state = { x: 100, y: 100, ancho: 100, alto: 100 };
+      processing.size(WIDTH, HEIGHT);
+      processing.state = { x: 1, y: 100, ancho: 100, alto: 100, type: "ellipse"};
     }
     // Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar
     processing.drawGame = function (world) {
@@ -36,7 +37,23 @@
      * Cambia la posición del objeto moviendolo 1 unidad a la derecha. 
      */
     processing.onTic = function (world) {
-      return make(world, { x: world.x - 1 });
+      if( world.x + world.ancho >= WIDTH)
+        return make(world, { x: world.x - world.dirx, dirx: -world.dirx});
+      else {
+        if( world.x <= 0) {
+          return make(world, { x: world.x - world.dirx, dirx: -world.dirx});
+        }
+      }
+      if( world.y + world.alto >= HEIGHT)
+        return make(world, { y: world.y - world.diry, diry: -world.diry});
+      else {
+        if( world.y <= 0) {
+          return make(world, { y: world.y - world.diry, diry: -world.diry});
+        }
+      }
+      
+      return make(world, { x: world.x + world.dirx, y: world.y + world.diry});
+      
     }
 
     processing.onMouseEvent = function (world, event) {

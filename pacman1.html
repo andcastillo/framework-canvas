@@ -32,6 +32,8 @@
   [1, 0, 1, 0, 1],
   [1, 1, 1, 1, 1]];
 
+  let FOTO = null;
+
   function sketchProc(processing) {
     /**
      * Esto se llama antes de iniciar el juego
@@ -39,7 +41,7 @@
     processing.setup = function () {
       processing.frameRate(2);
       processing.size(WIDTH, HEIGHT);
-      let bloque = processin.loadImage('b.png')
+      FOTO = processing.loadImage('./images/foto.png');
       processing.state = { time: 0, pacman: { x: 10, y: 1 }, cookies: [{ x: 1, y: 2 }, { x: 2, y: 1 }], phantone: [{ x: 1, y: 10 }] };
     }
     // Dibuja algo en el canvas. Aqui se pone todo lo que quieras pintar
@@ -52,7 +54,8 @@
         forEach(row, (cell, j) => {
           if(cell == 1) {
             processing.fill(200, 0, 0);
-            processing.rect(j * SIZE, i * SIZE, SIZE, SIZE);
+            //processing.rect(j * SIZE, i * SIZE, SIZE, SIZE);
+            processing.image(FOTO, j * SIZE, i * SIZE, SIZE, SIZE);
           } if (cell == 0) {
             processing.fill(0, 0, 0);
             processing.rect(j * SIZE, i * SIZE, SIZE, SIZE);
@@ -65,17 +68,14 @@
         } );
       });
 
-      if (mapa[0][0] == 1)
-        processing.image(bloque, x, y)
-
       if (world.time % 2 == 0)
-        processing.arc(world.pacman.x * SIZE, world.pacman.y * SIZE, SIZE, SIZE, -Math.PI * 3 / 4, Math.PI * 3 / 4);
+        processing.arc(world.pacman.x * SIZE + SIZE / 2, world.pacman.y * SIZE + SIZE / 2, SIZE, SIZE, -Math.PI * 3 / 4, Math.PI * 3 / 4);
       else
-        processing.arc(world.pacman.x * SIZE, world.pacman.y * SIZE, SIZE, SIZE, 0, Math.PI * 2);
+        processing.arc(world.pacman.x * SIZE  + SIZE / 2, world.pacman.y * SIZE + SIZE / 2, SIZE, SIZE, 0, Math.PI * 2);
 
       processing.fill(250, 200, 30);
       const cookie1 = first(world.cookies);
-      processing.ellipse(cookie1.x * SIZE, cookie1.y * SIZE, SIZE / 2, SIZE / 2);
+      processing.ellipse(cookie1.x * SIZE + SIZE / 2, cookie1.y * SIZE + SIZE / 2, SIZE / 2, SIZE / 2);
     }
 
     /**

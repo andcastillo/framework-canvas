@@ -32,7 +32,7 @@ function onTic(Mundo){
 function onMouseEvent (Mundo, event) {
   // Por ahora no cambia el mundo. Solo retorna una copia del mundo actual
   if (event.action == "press"){
-    return make(Mundo, {posiciones: cons(cons(mouseX, cons(mouseY,[])),Mundo.posiciones)} );
+    return make(Mundo, {posiciones: cons(cons(event.mouseX, cons(event.mouseY,[])),Mundo.posiciones)} );
   }else{
     return make(Mundo,{});
   }

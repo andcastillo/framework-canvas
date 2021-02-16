@@ -1,4 +1,4 @@
-<canvas id="canvas" width="300" height="300"></canvas>
+<div id="canvas"  width="300" height="300"></div>
 <p>
   <button onClick="processingInstance.setup()">
     Reiniciar
@@ -14,7 +14,7 @@
   </button>
 </p>
 
-<script src="web-lib/processing.js"></script>
+<script src="web-lib/p5.js"></script>
 <script src="web-lib/functional-light.js"></script>
 <script>
   //Vamos a usar http://processingjs.org/
@@ -30,7 +30,7 @@
   var color = 240;
 
   /**
-  * Ejemplo de interacción de la aplicación con botones de HTML. 
+  * Ejemplo de interacción de la aplicación con botones de HTML.
   * Los eventos de los botones modifican la animación.
   */
   function sketchProc(processing) {
@@ -40,7 +40,8 @@
      */
     processing.setup = function () {
       processing.frameRate(60);
-      processing.size(400, 400);
+      //processing.size(400, 400);
+      processing.createCanvas(400, 400); //Es necesario crear el Canvas
       processing.background(15, 200, 50);
       processing.state = { x: 100, y: 100, ancho: 100, alto: 100 };
     }
@@ -54,7 +55,7 @@
     }
 
 
-    // Esta es la función que pinta todo. Se ejecuta 60 veces por segundo. 
+    // Esta es la función que pinta todo. Se ejecuta 60 veces por segundo.
     // No cambie esta función. Su código debe ir en drawGame
     processing.draw = function () {
       processing.drawGame(processing.state);
@@ -88,19 +89,19 @@
 
     // ******************** De aquí hacia abajo no debe cambiar nada. ********************
 
-    // Esta función se ejecuta cada vez que presionamos una tecla. 
+    // Esta función se ejecuta cada vez que presionamos una tecla.
     // No cambie esta función. Su código debe ir en onKeyEvent
     processing.keyPressed = function () {
       processing.state = processing.onKeyEvent(processing.state, processing.keyCode);
     }
-    // Esta función se ejecuta cada vez movemos el mouse. 
+    // Esta función se ejecuta cada vez movemos el mouse.
     // No cambie esta función. Su código debe ir en onKeyEvent
     processing.mouseMoved = function () {
       processing.state = processing.onMouseEvent(processing.state,
         { action: "move", mouseX: processing.mouseX, mouseY: processing.mouseY });
     }
 
-    // Estas funciones controlan los eventos del mouse. 
+    // Estas funciones controlan los eventos del mouse.
     // No cambie estas funciones. Su código debe ir en OnMouseEvent
     processing.mouseClicked = function () {
       processing.state = processing.onMouseEvent(processing.state,
@@ -127,5 +128,5 @@
   var canvas = document.getElementById("canvas");
 
   // Adjuntamos nuestro sketch al framework de processing
-  var processingInstance = new Processing(canvas, sketchProc);
+  var processingInstance = new p5(sketchProc, canvas);
 </script>

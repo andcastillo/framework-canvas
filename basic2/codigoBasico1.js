@@ -1,13 +1,8 @@
 let { append, cons, first, isEmpty, isList, length, rest } = functionalLight;
 
-/**
- * Realiza una copia profunda(recursiva) del objeto que se pasa como parámetro
- * @param {object} value 
- * @returns {object}
- * @example deepCopy({a: 10, b: {a: 45}}); // => {a: 10, b: {a: 45}}
- */
-let deepCopy = function (value) {
-  return JSON.parse(JSON.stringify(value));
+// Actualiza los atributos del objeto y retorna una copia profunda
+function update(data, attribute) {
+  return Object.assign({}, data, attribute);
 }
 
 //////////////////////// Mundo inicial
@@ -33,20 +28,19 @@ function drawGame(Mundo){
 
 // Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones
 function onTic(Mundo){
-  return deepCopy(Mundo,{});
+  return update(Mundo,{});
 }
-
 
 //Implemente esta función si quiere que su programa reaccione a eventos del mouse
 function onMouseEvent (Mundo, event) {
   // Por ahora no cambia el mundo. Solo retorna una copia del mundo actual
-  return deepCopy(Mundo,{});
+  return update(Mundo,{});
 }
 
 //Implemente esta función si quiere que su programa reaccione a eventos del teclado
 function onKeyEvent (Mundo, event) {
   // Por ahora no cambia el mundo. Solo retorna una copia del mundo actual
-  return deepCopy(Mundo,{});
+  return update(Mundo,{});
 }
 
 

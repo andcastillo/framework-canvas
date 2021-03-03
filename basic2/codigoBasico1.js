@@ -1,10 +1,15 @@
 let { append, cons, first, isEmpty, isList, length, rest } = functionalLight;
 
-
-
-function make(Mundo, attributo){
-  return Object.assign({}, Mundo, attributo);
+/**
+ * Realiza una copia profunda(recursiva) del objeto que se pasa como parámetro
+ * @param {object} value 
+ * @returns {object}
+ * @example deepCopy({a: 10, b: {a: 45}}); // => {a: 10, b: {a: 45}}
+ */
+let deepCopy = function (value) {
+  return JSON.parse(JSON.stringify(value));
 }
+
 //////////////////////// Mundo inicial
 let Mundo = { x: 0, y: 0, ancho: 200, alto: 100 };
 ////////////////////////
@@ -16,7 +21,9 @@ function setup() {
   //processing.size(400, 400);
   noLoop();
 }
-
+// En esta función se pinta el mundo usando funciones de p5js
+// Puede usar todas las funciones descritas aquí: 
+// https://p5js.org/es/reference/
 function drawGame(Mundo){
   background(0, 255, 255);
   fill(240, 10, 240);
@@ -24,31 +31,29 @@ function drawGame(Mundo){
   rect(Mundo.x, Mundo.y, Mundo.ancho, Mundo.alto);
 }
 
+// Esto se ejecuta en cada tic del reloj. Con esto se pueden hacer animaciones
 function onTic(Mundo){
-  return make(Mundo,{});
+  return deepCopy(Mundo,{});
 }
-
-
 
 
 //Implemente esta función si quiere que su programa reaccione a eventos del mouse
 function onMouseEvent (Mundo, event) {
   // Por ahora no cambia el mundo. Solo retorna una copia del mundo actual
-  return make(Mundo,{});
+  return deepCopy(Mundo,{});
 }
 
 //Implemente esta función si quiere que su programa reaccione a eventos del teclado
 function onKeyEvent (Mundo, event) {
   // Por ahora no cambia el mundo. Solo retorna una copia del mundo actual
-  return make(Mundo,{});
+  return deepCopy(Mundo,{});
 }
 
-//////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////
-
+// Esta parte está como ilustración. 
+// Estas son las llamadas a las funciones de p5js
+// El estudiante no se debe preocupar por esto, pero se deja de referencia
 //////////////////////////////////////////////////////////////////////////
 
 

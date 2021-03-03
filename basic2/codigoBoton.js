@@ -1,10 +1,15 @@
 let { append, cons, first, isEmpty, isList, length, rest } = functionalLight;
 
-
-
-function make(Mundo, attributo){
-  return Object.assign({}, Mundo, attributo);
+/**
+ * Realiza una copia profunda(recursiva) del objeto que se pasa como parámetro
+ * @param {object} value 
+ * @returns {object}
+ * @example deepCopy({a: 10, b: {a: 45}}); // => {a: 10, b: {a: 45}}
+ */
+let deepCopy = function (value) {
+  return JSON.parse(JSON.stringify(value));
 }
+
 //////////////////////// Mundo inicial
 let Mundo = { };
 ////////////////////////
@@ -26,76 +31,30 @@ function drawGame(Mundo){
 }
 
 function onTic(Mundo){
-  return make(Mundo, { x: Mundo.x + 1 });
+  return deepCopy(Mundo, { x: Mundo.x + 1 });
 }
 
 
-
+/**
+ * Esta función se llama desde el HTML
+ */
 function changeColor () {
       color = Math.round(Math.random() * 255);
 }
 
+/**
+ * Esta función se llama desde el HTML
+ */
 function setSpeed (value) {
       frameRate(value);
 }
 
 //Implemente esta función si quiere que su programa reaccione a eventos del mouse
 function onMouseEvent (Mundo, event) {
-    return make(Mundo,{});
+    return deepCopy(Mundo,{});
 };
 
 //Implemente esta función si quiere que su programa reaccione a eventos del teclado
 function onKeyEvent (Mundo, event) {
-    return make(Mundo,{});
-}
-
-//////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////
-
-
-// Esta es la función que pinta todo. Se ejecuta 60 veces por segundo.
-// No cambie esta función. Su código debe ir en drawGame
-function draw() {
-  drawGame(Mundo);
-  Mundo = onTic(Mundo);
-};
-
-// Esta función se ejecuta cada vez que presionamos una tecla.
-// No cambie esta función. Su código debe ir en onKeyEvent
-function keyPressed() {
-  Mundo = onKeyEvent(Mundo, keyCode);
-}
-
-// Esta función se ejecuta cada vez movemos el mouse.
-// No cambie esta función. Su código debe ir en onKeyEvent
-function mouseMoved() {
-  Mundo = onMouseEvent(Mundo,
-    { action: "move", mouseX: mouseX, mouseY: mouseY });
-}
-
-// Estas funciones controlan los eventos del mouse.
-// No cambie estas funciones. Su código debe ir en OnMouseEvent
-function mouseClicked() {
-  Mundo = onMouseEvent(Mundo,
-    { action: "click", mouseX: mouseX, mouseY: mouseY, mouseButton: mouseButton });
-}
-
-function mouseDragged() {
-  Mundo = onMouseEvent(Mundo,
-    { action: "drag", mouseX: mouseX, mouseY: mouseY, mouseButton: mouseButton });
-}
-
-function mousePressed() {
-  Mundo= onMouseEvent(Mundo,
-    { action: "press", mouseX: mouseX, mouseY: mouseY, mouseButton: mouseButton });
-}
-
-function mouseReleased() {
-  Mundo = onMouseEvent(Mundo,
-    { action: "release", mouseX: mouseX, mouseY: mouseY, mouseButton: mouseButton });
+    return deepCopy(Mundo,{});
 }

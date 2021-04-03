@@ -17,7 +17,7 @@ function setup() {
   noLoop();
 }
 // En esta función se pinta el mundo usando funciones de p5js
-// Puede usar todas las funciones descritas aquí: 
+// Puede usar todas las funciones descritas aquí:
 // https://p5js.org/es/reference/
 function drawGame(Mundo){
   background(0, 255, 255);
@@ -38,14 +38,14 @@ function onMouseEvent (Mundo, event) {
 }
 
 //Implemente esta función si quiere que su programa reaccione a eventos del teclado
-function onKeyEvent (Mundo, event) {
+function onKeyEvent (Mundo, keyCode) {
   // Por ahora no cambia el mundo. Solo retorna una copia del mundo actual
   return update(Mundo,{});
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-// Esta parte está como ilustración. 
+// Esta parte está como ilustración.
 // Estas son las llamadas a las funciones de p5js
 // El estudiante no se debe preocupar por esto, pero se deja de referencia
 //////////////////////////////////////////////////////////////////////////

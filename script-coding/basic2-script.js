@@ -16,7 +16,7 @@ function setup() {
 }
 
 // En esta función se pinta el mundo usando funciones de p5js
-// Puede usar todas las funciones descritas aquí: 
+// Puede usar todas las funciones descritas aquí:
 // https://p5js.org/es/reference/
 function drawGame(Mundo){
   background(220);
@@ -41,7 +41,7 @@ function onMouseEvent (Mundo, event) {
 };
 
 //Implemente esta función si quiere que su programa reaccione a eventos del teclado
-function onKeyEvent (Mundo, event) {
+function onKeyEvent (Mundo, keyCode) {
   // Por ahora no cambia el mundo. Solo retorna una copia del mundo actual
 
     if(isEmpty(Mundo) != true){

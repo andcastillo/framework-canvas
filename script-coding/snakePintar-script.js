@@ -11,7 +11,7 @@ function update(data, attribute) {
 
 //////////////////////// Mundo inicial
 const mySnake = [{ x: 3, y: 1 }, { x: 2, y: 1 }, { x: 1, y: 1 }];
-const Mundo = { snake: mySnake, direction: 'RIGHT', food: [{ x: 5, y: 5 }], score: 0 }
+let Mundo = { snake: mySnake, direction: 'RIGHT', food: [{ x: 5, y: 5 }], score: 0 }
 const dx = 20;
 const dy = 20;
 ////////////////////////

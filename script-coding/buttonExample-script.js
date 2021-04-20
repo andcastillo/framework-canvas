@@ -50,6 +50,6 @@ function onMouseEvent (Mundo, event) {
 };
 
 //Implemente esta función si quiere que su programa reaccione a eventos del teclado
-function onKeyEvent (Mundo, event) {
+function onKeyEvent (Mundo, keyCode) {
     return update(Mundo,{});
 }
